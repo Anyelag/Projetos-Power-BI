@@ -20,6 +20,9 @@ Clientes: Informações sobre os clientes, como nome, endereço, telefone, e-mai
 
 - Fornecedores: Informações sobre os fornecedores, incluindo nome, CNPJ, endereço e dados de compra.
 
+ ![image](https://github.com/user-attachments/assets/23fd7187-cb34-4d59-b1d1-871641fffe89)
+
+
 ## Estrutura do Dashboard
 ### Inicio
 - **Valor total de vendas:** Mostra o valor total gerado por todas as vendas.
