@@ -1,0 +1,28 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["ft vendas","ft estoque","dim clientes","dim fornecedores","dim produto","Medidas"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'ft vendas'
+ref table DateTableTemplate_91e99162-281d-4c5d-91dc-838bcea4b7b1
+ref table LocalDateTable_8bf4740a-27dc-42ae-9fde-9236d08fe51c
+ref table 'ft estoque'
+ref table LocalDateTable_e2f5bd5a-5453-4269-af98-3bc5b7ab6c74
+ref table 'dim clientes'
+ref table 'dim fornecedores'
+ref table 'dim produto'
+ref table Medidas
+
+ref cultureInfo pt-BR
+

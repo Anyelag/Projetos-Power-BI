@@ -1,0 +1,58 @@
+table 'dim produto'
+	lineageTag: b1ae1a1e-388c-4ac0-9abe-2ada6ff57c97
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b587d133-98b9-4cdd-be6d-193c7b2c1aa9
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 67658956-0096-430a-81f8-d69b457f54c8
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: f84729fe-943d-4718-b34a-9947a4e2c6af
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 169dae87-cdc5-4106-aa5d-d21b0cced2c4
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6728594b-b988-48a5-b420-054c4620abe7
+		summarizeBy: sum
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim produto' = m
+		mode: import
+		source =
+				let
+				    Fonte = Value.NativeQuery(PostgreSQL.Database("localhost", "vendas"), "select * from produtos", null, [EnableFolding=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,35 @@
+table Medidas
+	lineageTag: d157ba99-b8e9-483d-9fb0-30e0124c8920
+
+	measure 'Contagem de clientes' = DISTINCTCOUNT('dim clientes'[id])
+		formatString: 0
+		lineageTag: 28fe75eb-9dbf-4355-8053-76529790cab3
+
+	measure 'Valor total' = SUM('ft vendas'[total_value])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 09ece24c-79c3-40b1-96e5-797553032d13
+
+	measure Quantidade = SUM('ft vendas'[quantity])
+		formatString: 0
+		lineageTag: 18bf8fd4-bb93-4042-a6de-e482ac34c517
+
+	measure Pedidos = DISTINCTCOUNT('ft vendas'[id])
+		formatString: 0
+		lineageTag: 2ef4f774-4042-4631-99dd-4610bdbba17a
+
+	measure 'Contagem de produtos' = DISTINCTCOUNT('dim produto'[product_id])
+		formatString: 0
+		lineageTag: 522b099b-056f-46bb-b774-a577acc21d68
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

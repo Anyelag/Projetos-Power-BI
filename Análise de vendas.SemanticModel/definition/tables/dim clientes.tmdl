@@ -1,0 +1,80 @@
+table 'dim clientes'
+	lineageTag: 1aeb4fda-0757-4cea-92e6-86d30b87c50f
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: f64cbfc1-8795-4484-8e94-ecc0910eaee5
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: e9cbed64-c3e3-43f0-b001-d01bdca7d81e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column register_number
+		dataType: string
+		lineageTag: 1f1451c0-0421-499c-b17d-1553d36e71db
+		summarizeBy: none
+		sourceColumn: register_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		lineageTag: f6624f9c-5344-4356-9a7f-5fd5f82bdf10
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: a4900247-d2b6-41ec-966e-3e0d86ab5c01
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: 1b30f0bd-e454-47a4-a7da-cc1e2b6dc7fa
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 27d266c8-4218-4399-86d5-35000397b2e9
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 18c6eba9-d2bd-4703-aba9-cf1dc2bcfe80
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim clientes' = m
+		mode: import
+		source =
+				let
+				    Fonte = Value.NativeQuery(PostgreSQL.Database("localhost", "vendas"), "select * from clientes", null, [EnableFolding=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

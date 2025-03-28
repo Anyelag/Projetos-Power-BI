@@ -1,0 +1,28 @@
+relationship 6e737bd2-9842-425c-bb6f-dd275a3163bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ft vendas'.sale_date
+	toColumn: LocalDateTable_8bf4740a-27dc-42ae-9fde-9236d08fe51c.Date
+
+relationship b920cc5e-64f1-46bb-8bfc-af06c371e4d8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ft estoque'.updated_at
+	toColumn: LocalDateTable_e2f5bd5a-5453-4269-af98-3bc5b7ab6c74.Date
+
+relationship AutoDetected_b8cbfe7a-232b-45e6-b213-cc709d7895e4
+	fromColumn: 'ft vendas'.product_id
+	toColumn: 'ft estoque'.product_id
+
+relationship AutoDetected_bf5bef26-3392-451d-8106-c0a65be0442d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'dim produto'.product_id
+	toColumn: 'ft estoque'.product_id
+
+relationship AutoDetected_feb08db2-5f2e-4f3d-90a2-714a78bfab33
+	fromColumn: 'ft estoque'.supplier_id
+	toColumn: 'dim fornecedores'.supplier_id
+
+relationship 09d0df6a-34b2-8331-01ab-b5856d54e051
+	fromColumn: 'ft vendas'.client_id
+	toColumn: 'dim clientes'.id
+

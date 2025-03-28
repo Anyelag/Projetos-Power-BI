@@ -1,0 +1,73 @@
+table 'dim fornecedores'
+	lineageTag: fbf60a06-3a1b-4f21-980e-2b4f376a831c
+
+	column supplier_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 62fabaa3-26fd-4e90-8135-b297bbd7c245
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column contractor_name
+		dataType: string
+		lineageTag: d5bb0609-89e1-4a56-bd16-9622b1b1aaaf
+		summarizeBy: none
+		sourceColumn: contractor_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column register_number
+		dataType: string
+		lineageTag: e49a364d-2263-48ef-af2d-0962cb9a63cf
+		summarizeBy: none
+		sourceColumn: register_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: d98956c0-9501-4cf9-956e-397810d7da27
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 47f1d1c7-a892-4d0c-bdc3-164532a1b7ab
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 6fd41d83-9a0e-4c39-8fc0-66ced5d63249
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column buyed_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: abab46b9-2091-4c03-8cda-59366957c925
+		summarizeBy: none
+		sourceColumn: buyed_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim fornecedores' = m
+		mode: import
+		source =
+				let
+				    Fonte = Value.NativeQuery(PostgreSQL.Database("localhost", "vendas"), "select * from fornecedores", null, [EnableFolding=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

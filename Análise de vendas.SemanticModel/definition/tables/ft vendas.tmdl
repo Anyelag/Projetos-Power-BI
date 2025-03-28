@@ -1,0 +1,74 @@
+table 'ft vendas'
+	lineageTag: 339bb409-31da-4153-9b86-3fc9e7c6865b
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: b97103f4-e167-4758-9c6e-b32ed0609762
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6706b94e-16f2-4e0d-8b9a-e1b7ede061cf
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 18db1fc0-c6f3-46d1-bf02-25474dabb167
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 24e01290-7234-47a3-bfd1-a034a56331bb
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column sale_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7061b99e-3144-4961-bec3-af2dda0dc827
+		summarizeBy: none
+		sourceColumn: sale_date
+
+		variation Variation
+			isDefault
+			relationship: 6e737bd2-9842-425c-bb6f-dd275a3163bf
+			defaultHierarchy: LocalDateTable_8bf4740a-27dc-42ae-9fde-9236d08fe51c.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_value
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 7aaa4e90-0d02-4fca-a95e-9d3683e9a3ef
+		summarizeBy: sum
+		sourceColumn: total_value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'ft vendas' = m
+		mode: import
+		source =
+				let
+				    Fonte = Value.NativeQuery(PostgreSQL.Database("localhost", "vendas"), "select * from vendas", null, [EnableFolding=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
